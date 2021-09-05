@@ -7,7 +7,7 @@ Everyone loves movies -- or, at least has an opinion about them. And since cinem
 We plan to use multiple datasets to aid our inquiry, from sources such as The International Movie Database (IMDb) and The Movies Database (TMDB). The former has compiled data on movie plots, critic and user reviews and ratings, and awards; the latter includes variables such as cast and crew, budgets and box office returns. Additional data, from from sources such as Kaggle, will also be included.
 
 ## Communication Protocols
-Each member of the team is accessible via Slack, both individually and via a group channel named "the_clever_crew." We've stayed in relatively frequent touch in and out of class, and have planned vide meetings outside of class.
+Each member of the team is accessible via Slack, both individually and via a group channel named "the_clever_crew." We've stayed in relatively frequent touch in and out of class, and have planned video calls outside of class.
 
 
 
