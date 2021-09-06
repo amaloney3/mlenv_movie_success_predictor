@@ -11,22 +11,22 @@
 
 ## My role as Database responsible for provisional Database:
 
-* I worked with my team to research and find three databases
+I worked with my team to research and find three databases
 - IMDb movies.csv
 - movies_metadata.csv
 - awards.csv
 
 We decided to concentrate on the 'IMDb movies.csv' and 'movies_metadata.csv' as a starting point.
 
-As the role of being responsible of the Database, I concentrated on trying some initial 'ETL', extract, transform and load.  
+The role of being responsible for the Database, I concentrated on trying some initial 'ETL', extract, transform and load:  
 
-* I loaded the 'IMDb movies.csv' and did preprocessing for the following:
+1) I loaded the 'IMDb movies.csv' and did preprocessing for the following:
 - movies that had a year greater than 1989
 - movies that were produced in "USA'
 - updated column name from 'IMDb_movies_df.rename(columns={'imdb_title_id':'imdb_id'}, inplace=True)' so that I could do merge
 with the 'movies_metadata.csv'
 
-* I then loaded the 'movies_metadata.csv' and did similar processing:
+2) I then loaded the 'movies_metadata.csv' and did similar processing:
 - movies that had a year greater than 1989
 - movies that were produced in "US'
 
