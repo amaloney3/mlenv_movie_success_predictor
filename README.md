@@ -1,11 +1,11 @@
 # Final Project: Machine Learning and Movie Analysis 
-### 20 Part One; My role as Database
+### 20 Part One; My role as 'Database'
 
-##Team members and roles for Segment 1:
-Maggie Allen - Presentation
-Andrew Malony - GitHub
-Kathy Morrissey - Machine Learning Model
-Rose Baumann - Database
+## Team members and roles for Segment 1:
+*Maggie Allen - Presentation
+*Andrew Malony - GitHub
+*Kathy Morrissey - Machine Learning Model
+*Rose Baumann - Database
 
 ## Overview of Machine Learning and Movie Analysis 
 
