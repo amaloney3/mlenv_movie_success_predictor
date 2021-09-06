@@ -6,10 +6,8 @@ Objective: Predict whether or not a movie will be successful. Success can be mea
 
 We will build a deep learning regression model, but our first pass will be a simple neural network with one hidden layer. The output variable will be based on the probability of average voter rating > .5, where a rating over 5 (out of 10) is considered a successful movie.
 
-To support the incremental use of additional hidden layers, and allow visualization with tensorflow, we use the Keras sequential model with one hidden layer. The input layer has xx variables. the ReLU activation function will be used in the expectation there are nonlinear relationships in the data.
+Although the dataset will ultimately be a mashup of three datasets, out initial demonstration of the model will use data from one source input as a csv file. This will be replaced later by a cloud-based database, but this does not impact the model demonstration.
 
-insert info about input data, optimization fn and loss metric when finished debugging the model.
+To support the incremental use of additional hidden layers, and allow visualization with tensorflow, we use the Keras sequential model with one hidden layer. The ReLU activation function will be used in the expectation there are nonlinear relationships in the data. The output layer will use the sigmoid activation function and one neuron to produce a probability
 
-The output layer will use the sigmoid activation function and one neuron to produce a probability.
-
-insert description of output
+I'm getting an error that I haven't yet figured out.
