@@ -32,6 +32,8 @@ with the 'movies_metadata.csv'
 
 ### Machine Learning provisional output
 
+* Initial output from the machine learning:
+Please referene : model_draft_1.ipynb
 
 ## Results:
 The dataset is smaller than expected, so may look at using movies from 1970 and greater and also including movies from UK and India rather than just US based movies.
