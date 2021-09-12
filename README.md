@@ -1,4 +1,3 @@
-
 ## Group Members
 - Andrew
 - Kathy
