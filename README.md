@@ -9,5 +9,8 @@ We plan to use multiple datasets to aid our inquiry, from sources such as The In
 ## Communication Protocols
 Each member of the team is accessible via Slack, both individually and via a group channel named "the_clever_crew." We've stayed in relatively frequent touch in and out of class, and have planned video calls outside of class.
 
-
-
+## Group Members
+- Andrew Maloney
+- Kathy Morrissey
+- Maggie Allen
+- Rose Baumann
