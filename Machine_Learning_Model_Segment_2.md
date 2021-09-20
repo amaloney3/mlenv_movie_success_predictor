@@ -47,7 +47,7 @@ In comparing the IMDB and the TMDB meta data it became clear the two datasets ag
 The awards dataset contained over 2 million records covering more than 16,000 different awards for the years 1970 to 2020. Again, the time and effort required to clean and transform the data made this dataset unuseable in the project time frame.
 
 Source code for cleaning datasets:
-#### update with new notebook names ad file names
+
 IMDB data:
 * notebook: IMDB_database_cleanup.ipynb
 * output file: imdb_main.csv
