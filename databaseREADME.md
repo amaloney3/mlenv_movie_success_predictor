@@ -20,7 +20,7 @@ For the database segment, we concentrated on some initial 'ETL' which means: ext
 with the 'movies_metadata.csv'
 
 2) We then loaded the 'movies_metadata.csv' and did similar processing:
-- movies that had a year greater than 1989
+- movies that had a year greater than 1969
 - movies that were produced in "US'
 
 ## Database Results:
