@@ -66,7 +66,7 @@ Merged IMDB and TMDB:
 
 ## How data was split for training and testing sets
 
-
+Train, test amd validation datasets were created. Stratified sampling waas done to ensure representativeness of success outcome in all samples. Valdation dataset was set at 30% of the sample and used in loss and accuracy graphs to aid in assessing model fit.
 
 ## Explanation of model choice, including limitations and benefits
 
@@ -80,11 +80,8 @@ The dataset contains various rating variables:
 * number of reviews from critics
 * numner of reviews from IMDB users
 
-The final measure of success will be determined as the model undergoes development.
+The final measure of success will be determined as the model undergoes development. As a placeholder, this current model uses IMDB score >= 7 to define success. The IMDB score ranges between 1 and 10.
 
-We will build a deep learning model, but our first pass will be a simple neural network with one hidden layer. The output variable will be based on the probability of (average voter rating > 5). (Ratings are on a scale of 0-10) Probability greater than 50% is considered a successful movie.
+The current model has two hidden layers utilizing the tanh activation function. Tanh is a better fit to the zero-centered scaled data than relu, because tanh accommodates negative values. The output variable will be based on the probability of (IMDB score >= 7), so the output layer has one node with a sigmoid activation function.
 
-The model was initially constructued using a limited set of variables from the TMDB dataset. In Segment 2, the dataset is replaced with a dataset containing both IMDB and TMDB data elements. The TMDB variables are available on less than 40% of the dataset.
-
-To support the incremental use of additional hidden layers, and allow visualization with tensorflow, we use the Keras sequential model with one hidden layer containing 10 nodes. The ReLU activation function will be used in the expectation there are nonlinear relationships in the data. The output layer will use the sigmoid activation function and one neuron to produce a probability.
-
+This week will focus on improving the features data and tuning this model. Additionally, other models such as a random forest classification model will be exploed and compared.
