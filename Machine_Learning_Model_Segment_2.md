@@ -85,3 +85,6 @@ The final measure of success will be determined as the model undergoes developme
 The current model has two hidden layers utilizing the tanh activation function. Tanh is a better fit to the zero-centered scaled data than relu, because tanh accommodates negative values. The output variable will be based on the probability of (IMDB score >= 7), so the output layer has one node with a sigmoid activation function.
 
 This week will focus on improving the features data and tuning this model. Additionally, other models such as a random forest classification model will be exploed and compared.
+
+notebook: Machine_Learning_Model_Segment_2.ipynb
+
