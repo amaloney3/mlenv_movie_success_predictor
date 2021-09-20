@@ -9,7 +9,7 @@ We plan to use multiple datasets to aid our inquiry, from sources such as The In
 ## Communication Protocols
 Each member of the team is accessible via Slack, both individually and via a group channel named "the_clever_crew." We've stayed in relatively frequent touch in and out of class, and have planned video calls outside of class.
 
-## Team members and roles for Segment 1:
+## Team members and roles for Segment 1
 * Maggie Allen - Presentation
 * Andrew Malony - GitHub
 * Kathy Morrissey - Machine Learning Model
@@ -17,7 +17,7 @@ Each member of the team is accessible via Slack, both individually and via a gro
 
 ## Overview of Machine Learning and Movie Analysis 
 
-### Database responsibilities for provisional Database:
+### Database responsibilities for provisional Database
 
 Worked with team to research and find three databases
 - IMDb movies.csv
@@ -38,7 +38,7 @@ with the 'movies_metadata.csv'
 - movies that had a year greater than 1989
 - movies that were produced in "US'
 
-## Database Results:
+## Database Results
 The dataset is smaller than expected, so we may look at using movies from 1970 and greater and also including movies from UK and India rather than just US based movies.
 
 ## Data Model
@@ -63,7 +63,7 @@ The features dataset contains 7 variables:
 
 This model was trained and tested. After 50 epochs, the model produced loss=54% and accuracy=74%
 
-## Team members and roles for Segment 2:
+## Team members and roles for Segment 2
 * Maggie Allen - Presentation/GitHub
 * Andrew Malony - Presentation/Exploratory Data Analysis
 * Kathy Morrissey - Data Cleaning/Analysis/Machine Learning
@@ -83,7 +83,7 @@ with the 'tmdb_main.csv'
 
 2) We pivoted from using Google Colab to using Jupyter notebooks to 'talk to AWS.'
 
-## Database Results:
+## Database Results
 - We have increased the number of records in our dataset by making movies we are looking at greater then 1969 instead of 1989.
 - We dropped fields that were difficult to manipulate and not clearly beneficial for a prediction model, such as certain actors and writers.
 
