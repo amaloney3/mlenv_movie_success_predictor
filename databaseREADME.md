@@ -1,12 +1,12 @@
-### Database responsibilities for provisional Database:
+### Database responsibilities for Database part 2:
 
-Worked with team to research and find three databases
+Worked with team to finalize two databases with possibility of using a third:
 - IMDb movies.csv
 - movies_metadata.csv
 - awards.csv
 
 We decided to concentrate on the 'IMDb movies.csv' and 'movies_metadata.csv' as a starting point.
-- genres was broken out into separate columns
+- 'genres' was broken out into separate columns
 - 'writers' column was dropped as it correlated to 'director' as we were concerned with over-fitting
 - 'actors' column was dropped as it was to unweildy 
 
@@ -24,4 +24,5 @@ with the 'movies_metadata.csv'
 - movies that were produced in "US'
 
 ## Database Results:
-The dataset is smaller than expected, so we may look at using movies from 1970 and greater and also including movies from UK and India rather than just US based movies.
+- We have increased the number of records in our dataset by making movies we are looking at greater then 1969 instead of 1989.
+- We dropped fields that were too difficult to manipulate due to too difficult data, ie actors and writers.
