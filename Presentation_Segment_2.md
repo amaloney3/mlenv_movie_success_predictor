@@ -1,5 +1,5 @@
 # Can We Forecast Film Success? Cinema and Machine-Learning
-Maggie's Contributions
+### Maggie's Contributions
 
 ## GitHub
 With the main reposititory residing on Andrew's account, I have stepped in to assist the team with the responsibilities of updating our individual branches and the main branch throughout the final project segmentation. This includes providing the team with an outline of steps required to successfully work in tandem within individual branches on our repository:
