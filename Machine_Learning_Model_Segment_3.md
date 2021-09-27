@@ -125,7 +125,7 @@ The current model has two hidden layers utilizing the tanh activation function. 
 
 Accuracy = 83%
 
-![deep learing model output](Images/NN_Output.PNG)
+![deep learing model output](Images/NN_output.PNG)
 
 notebook: Neural_Network_output.ipynb
 
