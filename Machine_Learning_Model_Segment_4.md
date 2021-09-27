@@ -105,30 +105,34 @@ the accuracy curve for nn shows validation accuracy always higher than training.
 
 ![model comparison](Images/model_comparison.PNG)
 
-o rerun for all models
-
 ## Random Forest
 
 ![random forest output](Images/RF_output.PNG)
-![random forest output2](Images/RF_output2.PNG)
+
+![random forest output2](Images/RF_output_2.PNG)
 
 [notebook:](Random_Forest_output_final.ipynb)
+
 [hmtl notebook:](Random_Forest_output_final.html)
 
 ### Logistic Regression
 
 ![logistic regression output](Images/LR_output.PNG)
+
 ![logistic regression output2](Images/LR_output2.PNG)
 
 [notebook:](Logistic_Regression_output_final.ipynb)
+
 [html notebook:](Logistic_Regression_output_final.html)
 
 ### Support Vector Machine
 
 ![Support Vector Machine output](Images/SV_output.PNG) 
+
 ![Support Vector Machine output2](Images/SV_output2.PNG) 
 
 [notebook:](Support_Vector_Machine_output_final.ipynb)
+
 [html notebook:](Support_Vector_Machine_output_final.html)
 
 ### Deep Learning
@@ -138,17 +142,21 @@ The current model has two hidden layers utilizing the tanh activation function. 
 Early Model:
 
 ![deep learing model output](Images/NN_output0.PNG)
+
 ![deep learing model output](Images/NN_output02.PNG)
 
 [notebook:](Neural_Network_output_0.ipynb)
+
 [html notebook:](Neural_Network_output_0.html)
 
 Final Model:
 
 ![deep learing model output](Images/NN_output_final.PNG)
-![deep learing model output](Images/NN_output_final2.PNG)
+
+![deep learing model output](Images/NN_output_final_2.PNG)
 
 [notebook:](Neural_Network_output_final.ipynb)
+
 [html notebook:](Neural_Network_output_final.html)
 
 
