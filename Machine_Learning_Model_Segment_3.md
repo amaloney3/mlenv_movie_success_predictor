@@ -75,7 +75,7 @@ In Segment 3, we explored using director information as a feature in the model. 
 
 Director names were provided in a string with up to two names. Each unique director name was identified two pieces of data were calculated: the number of movies credited to the director, and director's personal win rate (number of successful movies / number of movies credited to the director). These new variables were attached to each movie for each director. Where two directors were involved, the maximum values across the two directors was kept.
 
-These calculations turned out to be more difficult than anticipated. The two hypothesized features were calculated across the entire dataset rather than calculating per sample or calculating on a older dataset and using to predict on more recent movies releases. This would be corrected should the project be pursued further.
+These calculations turned out to be more difficult than anticipated. The two hypothesized features were calculated across the entire dataset rather than calculating per sample or calculating on a older dataset and using to predict on more recent movies releases. Trying to calculate these variables after selecting the sample became too difficult to accompliah in the available time. It would be worthwhile to address these variables should the project be pursued further.
 
 ## How data was split for training and testing sets
 
@@ -95,25 +95,39 @@ The dataset contains various rating variables:
 
 The modeling in Segment 3 used IMDB score >= 7 to define success. The IMDB score ranges between 1 and 10.
 
-We looked at logistic regression, support vector machine and deep learning models.
+We looked at logistic regression, support vector machine, deep learning models and random forest.
 
-The machine learning model program was built to support the three different models. The user selects the model in the second cell. 
+The machine learning model program was built to support the four different models. The user selects the model in the second cell. 
+
+## Random Forest
+
+Accuracy 80%
+
+![random forest output](Images/RF_output.PNG)
+
+notebook: Random_Forest_output.ipynb
 
 ### Logistic Regression
 
-Accuracy = 90.5%
+Accuracy = 83%
+
+![logistic regression output](Images/LR_output.PNG)
+
+notebook: Logistic_Regression_output.ipynb
 
 ### Support Vector Machine
 
-Accuracy = 90.1%
+program is hanging. try switching to linearsvc
 
 ### Deep Learning
 
 The current model has two hidden layers utilizing the tanh activation function. Tanh is a better fit to the zero-centered scaled data than relu, because tanh accommodates negative values. The output variable will be based on the probability of (IMDB score >= 7), so the output layer has one node with a sigmoid activation function.
 
-Accuracy = 90.0%
+Accuracy = 83%
 
-notebook: Machine_Learning_Model_Segment_3.ipynb
+![deep learing model output](Images/NN_Output.PNG)
+
+notebook: Neural_Network_output.ipynb
 
 
 
