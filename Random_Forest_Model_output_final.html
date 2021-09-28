@@ -14373,7 +14373,7 @@ a.anchor-link {
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Import-data-from-csv-file">Import data from csv file<a class="anchor-link" href="#Import-data-from-csv-file">&#182;</a></h2>
+<h2 id="Import-data-from-Postgres-db-in-AWS">Import data from Postgres db in AWS<a class="anchor-link" href="#Import-data-from-Postgres-db-in-AWS">&#182;</a></h2>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
@@ -14381,43 +14381,22 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># input merged dataset and select the appropriate dataframe</span>
-<span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;Resources/merged_movies.csv&quot;</span><span class="p">,</span> <span class="n">low_memory</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># import all from config to get credentials and host and database names in postgress</span>
+<span class="kn">from</span> <span class="nn">config</span> <span class="kn">import</span> <span class="o">*</span> 
+<span class="n">database_string</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;postgresql://</span><span class="si">{</span><span class="n">PGUSER</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">PGPASSWORD</span><span class="si">}</span><span class="s2">@</span><span class="si">{</span><span class="n">PGHOST</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">PGDATABASE</span><span class="si">}</span><span class="s2">&quot;</span>
 
-<span class="c1"># drop genre variables from TMDB </span>
-<span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;g_Action_TM&#39;</span><span class="p">,</span> <span class="s1">&#39;g_Adventure_TM&#39;</span><span class="p">,</span> <span class="s1">&#39;g_Animation_TM&#39;</span><span class="p">,</span> <span class="s1">&#39;g_Comedy_TM&#39;</span><span class="p">,</span> <span class="s1">&#39;g_Crime_TM&#39;</span><span class="p">,</span> 
-       <span class="s1">&#39;g_Documentary_TM&#39;</span><span class="p">,</span> <span class="s1">&#39;g_Drama_TM&#39;</span><span class="p">,</span> <span class="s1">&#39;g_Family_TM&#39;</span><span class="p">,</span> <span class="s1">&#39;g_Fantasy_TM&#39;</span><span class="p">,</span> <span class="s1">&#39;g_History_TM&#39;</span><span class="p">,</span> <span class="s1">&#39;g_Horror_TM&#39;</span><span class="p">,</span>
-       <span class="s1">&#39;g_Music_TM&#39;</span><span class="p">,</span> <span class="s1">&#39;g_Mystery_TM&#39;</span><span class="p">,</span> <span class="s1">&#39;g_News&#39;</span><span class="p">,</span> <span class="s1">&#39;g_Reality_TV&#39;</span><span class="p">,</span> <span class="s1">&#39;g_Romance_TM&#39;</span><span class="p">,</span>
-       <span class="s1">&#39;g_Sci_Fi&#39;</span><span class="p">,</span> <span class="s1">&#39;g_Sport&#39;</span><span class="p">,</span> <span class="s1">&#39;g_Thriller_TM&#39;</span><span class="p">,</span><span class="s1">&#39;g_War_TM&#39;</span><span class="p">,</span> <span class="s1">&#39;g_Western_TM&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># create variable for the engine</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">database_string</span><span class="p">)</span>
 
-<span class="c1"># drop columns with high percentage of missing values, and not needed</span>
-<span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;budget_IM&quot;</span><span class="p">,</span> <span class="s2">&quot;budget_TM&quot;</span><span class="p">,</span> <span class="s2">&quot;collection&quot;</span><span class="p">,</span> <span class="s2">&quot;g_Foreign&quot;</span><span class="p">,</span> <span class="s2">&quot;genre_name&quot;</span><span class="p">,</span> <span class="s2">&quot;metascore&quot;</span><span class="p">,</span> <span class="s2">&quot;orig_lang_cd&quot;</span><span class="p">,</span> 
-              <span class="s2">&quot;original_language&quot;</span><span class="p">,</span> <span class="s2">&quot;popularity&quot;</span><span class="p">,</span> <span class="s2">&quot;release_year_TM&quot;</span><span class="p">,</span> <span class="s2">&quot;revenue&quot;</span><span class="p">,</span> <span class="s2">&quot;runtime&quot;</span><span class="p">,</span> <span class="s2">&quot;usa_gross_income&quot;</span><span class="p">,</span> 
-              <span class="s2">&quot;website&quot;</span><span class="p">,</span> <span class="s2">&quot;worlwide_gross_income&quot;</span><span class="p">,</span> <span class="s2">&quot;year&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="c1"># drop columns with too many unique values </span>
-<span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;_merge&quot;</span><span class="p">,</span> <span class="s2">&quot;director_list&quot;</span><span class="p">,</span> <span class="s2">&quot;country&quot;</span><span class="p">,</span> <span class="s2">&quot;genre_list&quot;</span><span class="p">,</span> <span class="s2">&quot;imdb_id&quot;</span><span class="p">,</span> <span class="s2">&quot;language&quot;</span><span class="p">,</span> <span class="s2">&quot;title&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="c1"># Drop any rows with missing values. Reassess whether the nulls can/should be recoded and kept.</span>
-<span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;any&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="c1"># Choose dependent = predicted value:</span>
-<span class="c1"># Options: avg_vote, reviews_from_critics, reviews_from_users, votes</span>
-<span class="c1"># For this model pass, use avg_vote &gt;= 7 as success</span>
-<span class="n">df</span><span class="p">[</span><span class="s2">&quot;success&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;avg_vote&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">x</span><span class="o">&gt;=</span> <span class="mf">7.0</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
-
-<span class="c1"># Drop unneeded dependent variables</span>
-<span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;avg_vote&quot;</span><span class="p">,</span> <span class="s2">&quot;reviews_from_users&quot;</span><span class="p">,</span> <span class="s2">&quot;reviews_from_critics&quot;</span><span class="p">,</span> <span class="s2">&quot;votes&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="c1"># Categorical variables for encoding, if needed</span>
-<span class="n">cat_vars</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;g_Action_IM&#39;</span><span class="p">,</span> <span class="s1">&#39;g_Adult&#39;</span><span class="p">,</span> <span class="s1">&#39;g_Adventure_IM&#39;</span><span class="p">,</span>
-       <span class="s1">&#39;g_Animation_IM&#39;</span><span class="p">,</span> <span class="s1">&#39;g_Biography&#39;</span><span class="p">,</span> <span class="s1">&#39;g_Comedy_IM&#39;</span><span class="p">,</span> <span class="s1">&#39;g_Crime_IM&#39;</span><span class="p">,</span>
-       <span class="s1">&#39;g_Documentary_IM&#39;</span><span class="p">,</span> <span class="s1">&#39;g_Drama_IM&#39;</span><span class="p">,</span> <span class="s1">&#39;g_Family_IM&#39;</span><span class="p">,</span> <span class="s1">&#39;g_Fantasy_IM&#39;</span><span class="p">,</span>
-       <span class="s1">&#39;g_History_IM&#39;</span><span class="p">,</span> <span class="s1">&#39;g_Horror_IM&#39;</span><span class="p">,</span> <span class="s1">&#39;g_Music_IM&#39;</span><span class="p">,</span> <span class="s1">&#39;g_Musical&#39;</span><span class="p">,</span>
-       <span class="s1">&#39;g_Mystery_IM&#39;</span><span class="p">,</span> <span class="s1">&#39;g_Romance_IM&#39;</span><span class="p">,</span> <span class="s1">&#39;g_Thriller_IM&#39;</span><span class="p">,</span> <span class="s1">&#39;g_War_IM&#39;</span><span class="p">,</span>
-       <span class="s1">&#39;g_Western_IM&#39;</span><span class="p">]</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="c1">#def connect():</span>
+<span class="c1"># Set up a connection to the postgres server.</span>
+<span class="n">conn_string</span> <span class="o">=</span> <span class="s2">&quot;host=&quot;</span><span class="o">+</span> <span class="n">creds</span><span class="o">.</span><span class="n">PGHOST</span> <span class="o">+</span><span class="s2">&quot; port=&quot;</span><span class="o">+</span> <span class="s2">&quot;5432&quot;</span> <span class="o">+</span><span class="s2">&quot; dbname=&quot;</span><span class="o">+</span> <span class="n">creds</span><span class="o">.</span><span class="n">PGDATABASE</span> <span class="o">+</span><span class="s2">&quot; user=&quot;</span> <span class="o">+</span> <span class="n">creds</span><span class="o">.</span><span class="n">PGUSER</span> \
+                  <span class="o">+</span><span class="s2">&quot; password=&quot;</span><span class="o">+</span> <span class="n">creds</span><span class="o">.</span><span class="n">PGPASSWORD</span>
+<span class="n">conn</span> <span class="o">=</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">conn_string</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Connected!&quot;</span><span class="p">)</span>
+<span class="c1"># Create a cursor object</span>
+<span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+<span class="c1">#return conn, cursor</span>
 </pre></div>
 
      </div>
@@ -14437,13 +14416,95 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Index([&#39;duration&#39;, &#39;g_Action_IM&#39;, &#39;g_Adult&#39;, &#39;g_Adventure_IM&#39;,
-       &#39;g_Animation_IM&#39;, &#39;g_Biography&#39;, &#39;g_Comedy_IM&#39;, &#39;g_Crime_IM&#39;,
-       &#39;g_Documentary_IM&#39;, &#39;g_Drama_IM&#39;, &#39;g_Family_IM&#39;, &#39;g_Fantasy_IM&#39;,
-       &#39;g_History_IM&#39;, &#39;g_Horror_IM&#39;, &#39;g_Music_IM&#39;, &#39;g_Musical&#39;,
-       &#39;g_Mystery_IM&#39;, &#39;g_Romance_IM&#39;, &#39;g_Thriller_IM&#39;, &#39;g_War_IM&#39;,
-       &#39;g_Western_IM&#39;, &#39;release_year_IM&#39;, &#39;success&#39;],
+<pre>Connected!
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># read file from AWS joined_tables2 contains the combined IMDB/TMDB data</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;select * from join_final&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># drop columns with high percentage of missing values, and not needed</span>
+<span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;budget&quot;</span><span class="p">,</span> <span class="s2">&quot;collection&quot;</span><span class="p">,</span> <span class="s2">&quot;metascore&quot;</span><span class="p">,</span> <span class="s2">&quot;orig_lang_cd&quot;</span><span class="p">,</span> <span class="s2">&quot;release_year&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;original_language&quot;</span><span class="p">,</span> <span class="s2">&quot;popularity&quot;</span><span class="p">,</span> <span class="s2">&quot;revenue&quot;</span><span class="p">,</span> <span class="s2">&quot;runtime&quot;</span><span class="p">,</span> <span class="s2">&quot;usa_gross_income&quot;</span><span class="p">,</span> 
+              <span class="s2">&quot;website&quot;</span><span class="p">,</span> <span class="s2">&quot;worlwide_gross_income&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># drop columns with too many unique values </span>
+<span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;director_list&quot;</span><span class="p">,</span> <span class="s2">&quot;country&quot;</span><span class="p">,</span> <span class="s2">&quot;imdb_id&quot;</span><span class="p">,</span> <span class="s2">&quot;language&quot;</span><span class="p">,</span> <span class="s2">&quot;title&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Choose dependent = predicted value:</span>
+<span class="c1"># Options: avg_vote, reviews_from_critics, reviews_from_users, votes</span>
+<span class="c1"># For this model pass, use avg_vote &gt;= 7 as success</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;success&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;avg_vote&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">x</span><span class="o">&gt;=</span> <span class="mf">7.0</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Drop unneeded dependent variables</span>
+<span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;avg_vote&quot;</span><span class="p">,</span> <span class="s2">&quot;reviews_from_users&quot;</span><span class="p">,</span> <span class="s2">&quot;reviews_from_critics&quot;</span><span class="p">,</span> <span class="s2">&quot;votes&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Drop any rows with missing values. Reassess whether the nulls can/should be recoded and kept.</span>
+<span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;any&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Categorical variables for encoding, if needed</span>
+<span class="n">cat_vars</span> <span class="o">=</span> <span class="p">[</span> <span class="s1">&#39;g_action&#39;</span><span class="p">,</span> <span class="s1">&#39;g_adult&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;g_adventure&#39;</span><span class="p">,</span> <span class="s1">&#39;g_animation&#39;</span><span class="p">,</span> <span class="s1">&#39;g_biography&#39;</span><span class="p">,</span> <span class="s1">&#39;g_comedy&#39;</span><span class="p">,</span> <span class="s1">&#39;g_crime&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;g_documentary&#39;</span><span class="p">,</span> <span class="s1">&#39;g_drama&#39;</span><span class="p">,</span> <span class="s1">&#39;g_family&#39;</span><span class="p">,</span> <span class="s1">&#39;g_fantasy&#39;</span><span class="p">,</span> <span class="s1">&#39;g_history&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;g_horror&#39;</span><span class="p">,</span> <span class="s1">&#39;g_music&#39;</span><span class="p">,</span> <span class="s1">&#39;g_musical&#39;</span><span class="p">,</span> <span class="s1">&#39;g_mystery&#39;</span><span class="p">,</span> <span class="s1">&#39;g_news&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;g_reality_tv&#39;</span><span class="p">,</span> <span class="s1">&#39;g_romance&#39;</span><span class="p">,</span> <span class="s1">&#39;g_sci_fi&#39;</span><span class="p">,</span> <span class="s1">&#39;g_sport&#39;</span><span class="p">,</span> <span class="s1">&#39;g_thriller&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;g_war&#39;</span><span class="p">,</span> <span class="s1">&#39;g_western&#39;</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> number of movies: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> numner of success: </span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;success&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>Index([&#39;year&#39;, &#39;duration&#39;, &#39;g_action&#39;, &#39;g_adult&#39;, &#39;g_adventure&#39;, &#39;g_animation&#39;,
+       &#39;g_biography&#39;, &#39;g_comedy&#39;, &#39;g_crime&#39;, &#39;g_documentary&#39;, &#39;g_drama&#39;,
+       &#39;g_family&#39;, &#39;g_fantasy&#39;, &#39;g_history&#39;, &#39;g_horror&#39;, &#39;g_music&#39;,
+       &#39;g_musical&#39;, &#39;g_mystery&#39;, &#39;g_news&#39;, &#39;g_reality_tv&#39;, &#39;g_romance&#39;,
+       &#39;g_sci_fi&#39;, &#39;g_sport&#39;, &#39;g_thriller&#39;, &#39;g_war&#39;, &#39;g_western&#39;, &#39;success&#39;],
       dtype=&#39;object&#39;)
+
+ number of movies: 70529
+
+ numner of success: 12220
 </pre>
 </div>
 </div>
@@ -14460,7 +14521,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="n">dataset</span> <span class="o">==</span> <span class="s1">&#39;S&#39;</span><span class="p">:</span>  <span class="c1"># create encoded and scaled dataset</span>
@@ -14486,10 +14547,10 @@ a.anchor-link {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Create-Sample-Datasets">Create Sample Datasets<a class="anchor-link" href="#Create-Sample-Datasets">&#182;</a></h2>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Split our preprocessed data into our features and target arrays</span>
@@ -14500,11 +14561,39 @@ a.anchor-link {
 
 <span class="c1"># Split the preprocessed data into a training and testing dataset</span>
 <span class="n">X_train</span><span class="p">,</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_train</span><span class="p">,</span><span class="n">y_test</span> <span class="o">=</span><span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">,</span><span class="n">random_state</span><span class="o">=</span><span class="mi">67</span><span class="p">)</span>
+
+<span class="c1"># print sample sizes</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> size of training dataset: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">y_train</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> size of testing dataset: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>
+ size of training dataset: 52896
+
+ size of testing dataset: 17633
+</pre>
+</div>
+</div>
+
+</div>
+
 </div>
 
 </div>
@@ -14515,7 +14604,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="n">dataset</span> <span class="o">==</span> <span class="s1">&#39;S&#39;</span><span class="p">:</span>  <span class="c1"># create encoded and scaled dataset</span>
@@ -14545,7 +14634,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="n">model_type</span> <span class="o">==</span> <span class="s2">&quot;RF&quot;</span><span class="p">:</span>
@@ -14591,68 +14680,76 @@ a.anchor-link {
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>
- Random Forest Classifier accuracy: 0.795
+ Random Forest Classifier accuracy: 0.803
 
  Confusion Matrix: 
            Predicted 0  Predicted 1
-Actual 0         8742          750
-Actual 1         1602          385
+Actual 0        13438         1140
+Actual 1         2333          722
 
  Classification Report: 
                precision    recall  f1-score   support
 
-           0       0.85      0.92      0.88      9492
-           1       0.34      0.19      0.25      1987
+           0       0.85      0.92      0.89     14578
+           1       0.39      0.24      0.29      3055
 
-    accuracy                           0.80     11479
-   macro avg       0.59      0.56      0.56     11479
-weighted avg       0.76      0.80      0.77     11479
+    accuracy                           0.80     17633
+   macro avg       0.62      0.58      0.59     17633
+weighted avg       0.77      0.80      0.78     17633
 
 
  Feature Importances: 
-     importance               feature
-0     0.502052              duration
-1     0.361940       release_year_IM
-2     0.007173        g_Drama_IM_0.0
-3     0.007074        g_Drama_IM_1.0
-4     0.005847       g_Comedy_IM_0.0
-5     0.005713       g_Comedy_IM_1.0
-6     0.005564     g_Thriller_IM_0.0
-7     0.005537     g_Thriller_IM_1.0
-8     0.005484        g_Crime_IM_1.0
-9     0.005408        g_Crime_IM_0.0
-10    0.005067       g_Action_IM_1.0
-11    0.004969       g_Action_IM_0.0
-12    0.004969      g_Romance_IM_0.0
-13    0.004876       g_Horror_IM_0.0
-14    0.004848      g_Romance_IM_1.0
-15    0.004744    g_Adventure_IM_0.0
-16    0.004710    g_Adventure_IM_1.0
-17    0.004705       g_Horror_IM_1.0
-18    0.004080      g_Mystery_IM_1.0
-19    0.004056      g_Mystery_IM_0.0
-20    0.003850      g_Fantasy_IM_0.0
-21    0.003771      g_Fantasy_IM_1.0
-22    0.003203       g_Family_IM_1.0
-23    0.003196       g_Family_IM_0.0
-24    0.002560       g_Biography_0.0
-25    0.002510    g_Animation_IM_0.0
-26    0.002458    g_Animation_IM_1.0
-27    0.002394       g_Biography_1.0
-28    0.002132      g_History_IM_0.0
-29    0.002127      g_History_IM_1.0
-30    0.001762        g_Music_IM_1.0
-31    0.001720        g_Music_IM_0.0
-32    0.001691         g_Musical_0.0
-33    0.001670         g_Musical_1.0
-34    0.001640          g_War_IM_1.0
-35    0.001627          g_War_IM_0.0
-36    0.001420      g_Western_IM_1.0
-37    0.001329      g_Western_IM_0.0
-38    0.000065           g_Adult_1.0
-39    0.000050           g_Adult_0.0
-40    0.000004  g_Documentary_IM_1.0
-41    0.000004  g_Documentary_IM_0.0
+       importance          feature
+0   4.519275e-01         duration
+1   3.644116e-01             year
+2   1.666553e-02        g_drama_0
+3   1.438923e-02        g_drama_1
+4   6.671588e-03    g_animation_0
+5   6.633038e-03    g_animation_1
+6   6.600483e-03       g_horror_0
+7   6.325885e-03       g_action_0
+8   6.001543e-03       g_comedy_1
+9   6.000006e-03       g_action_1
+10  5.974653e-03       g_horror_1
+11  5.703193e-03       g_comedy_0
+12  5.511166e-03      g_romance_0
+13  5.384984e-03      g_romance_1
+14  4.835502e-03        g_crime_0
+15  4.828640e-03        g_crime_1
+16  4.617641e-03    g_adventure_0
+17  4.570942e-03    g_biography_1
+18  4.497725e-03    g_adventure_1
+19  4.357684e-03     g_thriller_0
+20  4.006573e-03      g_fantasy_1
+21  4.001134e-03      g_fantasy_0
+22  3.931141e-03    g_biography_0
+23  3.864837e-03      g_history_1
+24  3.864725e-03     g_thriller_1
+25  3.736665e-03      g_history_0
+26  3.643411e-03       g_family_1
+27  3.638120e-03       g_family_0
+28  3.327125e-03      g_mystery_0
+29  3.310558e-03      g_mystery_1
+30  2.904614e-03        g_music_0
+31  2.846720e-03       g_sci_fi_1
+32  2.719136e-03       g_sci_fi_0
+33  2.630586e-03          g_war_0
+34  2.599002e-03        g_music_1
+35  2.417596e-03      g_musical_0
+36  2.384100e-03          g_war_1
+37  2.201185e-03      g_musical_1
+38  1.770960e-03        g_sport_0
+39  1.769075e-03        g_sport_1
+40  1.168873e-03      g_western_1
+41  1.144693e-03      g_western_0
+42  1.017719e-04  g_documentary_0
+43  9.582906e-05  g_documentary_1
+44  4.356125e-06         g_news_0
+45  3.550606e-06         g_news_1
+46  1.963946e-06        g_adult_0
+47  1.287675e-06        g_adult_1
+48  9.498340e-07   g_reality_tv_1
+49  9.329253e-07   g_reality_tv_0
 </pre>
 </div>
 </div>
@@ -14664,7 +14761,7 @@ weighted avg       0.76      0.80      0.77     11479
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="n">model_type</span> <span class="o">==</span> <span class="s2">&quot;LR&quot;</span><span class="p">:</span>
@@ -14699,10 +14796,10 @@ weighted avg       0.76      0.80      0.77     11479
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Note: svm =SVC(kernel=&#39;linear&#39;) keeps hanging - not clear why</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Support Vector Machine - used model Linear SVC because svm =SVC(kernel=&#39;linear&#39;) kept hanging</span>
 
 <span class="k">if</span> <span class="n">model_type</span> <span class="o">==</span> <span class="s2">&quot;SV&quot;</span><span class="p">:</span>
     <span class="c1"># Create the SVM model</span>
@@ -14722,7 +14819,7 @@ weighted avg       0.76      0.80      0.77     11479
     <span class="n">intercept</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">intercept_</span>
     <span class="n">output</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">coef</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">output_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Coefficient&#39;</span><span class="p">,</span><span class="s1">&#39;Feature&#39;</span><span class="p">])</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; SVM model paramaters: </span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="n">output_df</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; SVM model parameters: </span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="n">output_df</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     
     <span class="c1"># Create a DataFrame from the confusion matrix.</span>
     <span class="n">cm_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">cm</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Actual 0&quot;</span><span class="p">,</span> <span class="s2">&quot;Actual 1&quot;</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Predicted 0&quot;</span><span class="p">,</span> <span class="s2">&quot;Predicted 1&quot;</span><span class="p">])</span>
@@ -14740,7 +14837,7 @@ weighted avg       0.76      0.80      0.77     11479
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="n">model_type</span> <span class="o">==</span> <span class="s2">&quot;NN&quot;</span><span class="p">:</span>
@@ -14764,7 +14861,7 @@ weighted avg       0.76      0.80      0.77     11479
     <span class="n">nn</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s2">&quot;binary_crossentropy&quot;</span><span class="p">,</span><span class="n">optimizer</span><span class="o">=</span><span class="s2">&quot;adam&quot;</span><span class="p">,</span><span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;accuracy&quot;</span><span class="p">])</span>
 
     <span class="c1"># Fit the model to the training data</span>
-    <span class="n">fit_model</span> <span class="o">=</span><span class="n">nn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">,</span><span class="n">validation_split</span><span class="o">=.</span><span class="mi">3</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">fit_model</span> <span class="o">=</span><span class="n">nn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">,</span><span class="n">validation_split</span><span class="o">=.</span><span class="mi">3</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 
     <span class="c1"># Evaluate the model using the test data</span>
     <span class="n">y_pred</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">predict_classes</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span> 
