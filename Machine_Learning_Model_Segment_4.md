@@ -51,19 +51,19 @@ The awards dataset contained over 2 million records covering more than 16,000 di
 Source code for cleaning datasets:
 
 IMDB data:
-* notebook: IMDB_database_cleanup.ipynb
+* [notebook: ](IMDB_database_cleanup.ipynb)
 * output file: imdb_main.csv
 
 TMDB data:
-* notebook: TMDB_database_cleanup.ipynb
+* [notebook: ](TMDB_database_cleanup.ipynb)
 * output file: tmdb_main.csv
 
 Awards data:
-* notebook: Merging_IMDB_Awards
+* [notebook: ](Merging_IMDB_Awards)
 * file: N/A
 
 Merged IMDB and TMDB:
-* notebook: Merging_IMDB_Awards
+* [notebook: ](Merging_IMDB_Awards)
 * output file: merged_movies.csv
 
 In Segment 3, we explored using director information as a feature in the model. We identified two hypotheses:
@@ -79,7 +79,7 @@ Director names were provided in a string with up to two names. Each unique direc
 
 Models using these director features had accuracy rates around 90%, however we realized these features were calculated across the entire dataset rather than calculated per sample or calculated on a older dataset and used to predict on more recent movies releases. Small wonder the accuracy was so high. Trying to calculate these variables after selecting the samples became too difficult to accomplish in the available time, so director features were dropped from consideration.
 
-notebook: Exploratory_director_data.ipynb
+[notebook: ](Exploratory_director_data.ipynb)
 
 ## How data was split for training and testing sets
 
@@ -179,13 +179,8 @@ Final Model:
 
 [html notebook:](Neural_Network_output_final.html)
 
+## Write Predictions Back to Database
 
+All of the data was run through the final neural network model to calculate predicted values, and a new table called "predictions" was created containing the IMDB_id and the predicted class.
 
-### Bullets for presentation:
-
-- Although we started out with an enormous amount of data, once we finished cleaning and evaluating the data we were left with a small set of variables as features: genres, directors, duration of the movie, and release year
-- Also, although we started out with three different types of metrics for measuring success, again, after cleaning and evaluation we were left with the IMDB score, which is based on a proprietary algotithm on user ratings
-- We tested three (four with Andrew's investigations) models, that all performed similarly, resulting in accuracy of 90%. 
-- I would like to add more on the results of the models which I can do on Sunday
-- Improvements to be explored: using awards data, actors.
-- Improvements: set up samples to build a model for predicting future success. The current approach classifies winning movies well, but it is not designed to predict future success.
+[notebook: ](Machine_Learning_Model_Segment_4_Write_to_Database.ipynb)
