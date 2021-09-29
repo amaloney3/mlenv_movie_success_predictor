@@ -1,4 +1,4 @@
-## Machine Learning Model Segment 3
+## Machine Learning Model Segment 4
 
 ## Preliminary Data Processing
 
@@ -34,7 +34,7 @@ Some common issues in cleaning the data had to be overcome, including:
 * Currency abbreviations attached to numbers that casued the inferred data types to be rendered as strings 
 * Raw data scraped from websites is generally prone to inconsistency in data structures, inconsistency in data encoding and data entry errors. This variability in data elements places great importance on discerning the actual meaning of values, matching strings to identify dictinct categories, and devising appropriate transformations for use in machine learning models
 
-The datasets were cleaned separately to handle their specific data issues and then merged on IMDB ID number for comparisons and creation of the final input dataset.
+The datasets were cleaned separately to handle their specific data issues and then merged on IMDB ID number for comparisons and creation of the final input dataset. These csv files were used for data exploration, cleaning and modeling while the AWS database was under development
 
 Although machine learning models can handle some "messy" data, cleaning and standardizing data in an appropriate fashion before inputting to the model development should result in a model that requires less training and tuning.
 
@@ -42,7 +42,7 @@ Although machine learning models can handle some "messy" data, cleaning and stan
 
 Preliminary feature engineering and selection focused on identifying cleanliness and presence of data elements, as well as the ability to transform the data element into a meaningful and useful model variable. As a group, the team reviewed the data elements and made decisions on individual variables. Some variables were discarded due to the difficulty and time required to process. For example, there are over 19,000 production companies, and some movies had 10 or more production companies involved. Similarly, the number of countries in production and the number of actors for each movie produce an overwhelming number of possible combinations. Other variables were discarded due to the the high number of missing values and inability to impute missing values. 
 
-In comparing the IMDB and the TMDB meta data it became clear the two datasets agreed very well in their contents, but the IMDB data was more current, containing many more movies. As a result, IMDB data is the main source, supplemented as possible by TMDB data. Model evaluation will determine whether the resulting missing values can be used. 
+In comparing the IMDB and the TMDB meta data it became clear the two datasets agreed very well in their contents, but the IMDB data was more current, containing many more movies. As a result, IMDB data is the main source, supplemented as possible by TMDB data. While developing the Machine Learning Model, it was determined that variables with large percentages of missing values would be dropped. 
 
 The raw IMDB dataset contained 85,855 movies. The raw TMDB dataset contained 45,466 movies. After cleaning, our dataset contained 70,529 movies. Of these, 12,220 (17%) meet the success criterion.
 
@@ -51,19 +51,19 @@ The awards dataset contained over 2 million records covering more than 16,000 di
 Source code for cleaning datasets:
 
 IMDB data:
-* [notebook: ](IMDB_database_cleanup.ipynb)
+* [notebook: IMDB_database_cleanup.ipynb](IMDB_database_cleanup.ipynb)
 * output file: imdb_main.csv
 
 TMDB data:
-* [notebook: ](TMDB_database_cleanup.ipynb)
+* [notebook: TMDB_database_cleanup.ipynb](TMDB_database_cleanup.ipynb)
 * output file: tmdb_main.csv
 
 Awards data:
-* [notebook: ](Merging_IMDB_Awards)
+* [notebook: Merging_IMDB_Awards](Merging_IMDB_Awards)
 * file: N/A
 
 Merged IMDB and TMDB:
-* [notebook: ](Merging_IMDB_Awards)
+* [notebook: Merging_IMDB_Awards](Merging_IMDB_Awards)
 * output file: merged_movies.csv
 
 In Segment 3, we explored using director information as a feature in the model. We identified two hypotheses:
@@ -77,15 +77,15 @@ In Segment 3, we explored using director information as a feature in the model. 
 
 Director names were provided in a string with up to two names. Each unique director name was identified and two pieces of data were calculated: the number of movies credited to the director, and director's personal win rate (number of successful movies / number of movies credited to the director). These new variables were attached to each movie for each director. Where two directors were involved, the maximum values across the two directors was kept.
 
-Models using these director features had accuracy rates around 90%, however we realized these features were calculated across the entire dataset rather than calculated per sample or calculated on a older dataset and used to predict on more recent movies releases. Small wonder the accuracy was so high. Trying to calculate these variables after selecting the samples became too difficult to accomplish in the available time, so director features were dropped from consideration.
+Models using these director features had accuracy rates around 90%, however we realized these features were calculated across the entire dataset rather than calculated per sample or calculated on a older dataset and used to predict on more recent movies releases. Small wonder the accuracy was so high. Trying to calculate these variables after selecting the samples became too difficult to accomplish in the available time, so director features were dropped from the model.
 
-[notebook: ](Exploratory_director_data.ipynb)
+[notebook: Exploratory_director_data.ipynb](Exploratory_director_data.ipynb)
 
 ## How data was split for training and testing sets
 
 Train, test and validation datasets were created. Because the dataset contained only 17% successes, stratified sampling was done to ensure representativeness of the success outcome in all samples. 75% of the dataset was used for training and 25% for testing. The training sample contained 56,896 movies. The testing sample contained 17,633 movies.
 
-The validation dataset was set at 30% of the sample and used in loss and accuracy graphs to aid in assessing the deep learning model fit.
+The validation dataset was set at 30% of the training sample and used in loss and accuracy curves to aid in assessing the deep learning model fit.
 
 ## Explanation of model choice, including limitations and benefits
 
@@ -99,7 +99,7 @@ The dataset contains various rating variables:
 * number of reviews from critics
 * numner of reviews from IMDB users
 
-The modeling in Segment 4 used IMDB score >= 7 to define success. The IMDB score ranges between 1 and 10.
+We chose IMDB score >= 7 as our metric of success. The IMDB score ranges between 1 and 10.
 
 Initially, we started with a deep learning model, because of its flexibility, relative insensitivity to the distribution of the features input to the model, and the ability to use loss curves to help assess fit. By Segment 3, seeing the poor performance of the deep learning model, we decided to try other models and compare performance. We looked at logistic regression, support vector machine, and random forest. The performance was similar across the board. Our conclusion is the data is insufficient to support a model classifying success.
 
@@ -127,9 +127,9 @@ All of the model are poor at classifying successful movies. It is not surprising
 
 ![random forest output2](Images/RF_output_2.PNG)
 
-[notebook:](Random_Forest_output_final.ipynb)
+[notebook: Random_Forest_output_final.ipynb](Random_Forest_output_final.ipynb)
 
-[hmtl notebook:](Random_Forest_output_final.html)
+[hmtl notebook: Random_Forest_output_final.html](Random_Forest_output_final.html)
 
 ### Logistic Regression
 
@@ -137,9 +137,9 @@ All of the model are poor at classifying successful movies. It is not surprising
 
 ![logistic regression output2](Images/LR_output2.PNG)
 
-[notebook:](Logistic_Regression_output_final.ipynb)
+[notebook: Logistic_Regression_output_final.ipynb](Logistic_Regression_output_final.ipynb)
 
-[html notebook:](Logistic_Regression_output_final.html)
+[html notebook: Logistic_Regression_output_final.html](Logistic_Regression_output_final.html)
 
 ### Support Vector Machine
 
@@ -147,9 +147,9 @@ All of the model are poor at classifying successful movies. It is not surprising
 
 ![Support Vector Machine output2](Images/SV_output2.PNG) 
 
-[notebook:](Support_Vector_Machine_output_final.ipynb)
+[notebook: Support_Vector_Machine_output_final.ipynb](Support_Vector_Machine_output_final.ipynb)
 
-[html notebook:](Support_Vector_Machine_output_final.html)
+[html notebook: Support_Vector_Machine_output_final.html](Support_Vector_Machine_output_final.html)
 
 ### Deep Learning
 
@@ -165,9 +165,9 @@ Early Model:
 
 ![deep learing model output](Images/NN_output02.PNG)
 
-[notebook:](Neural_Network_output_0.ipynb)
+[notebook: Neural_Network_output_0.ipynb](Neural_Network_output_0.ipynb)
 
-[html notebook:](Neural_Network_output_0.html)
+[html notebook: Neural_Network_output_0.html](Neural_Network_output_0.html)
 
 Final Model:
 
@@ -175,12 +175,12 @@ Final Model:
 
 ![deep learing model output](Images/NN_output_final_2.PNG)
 
-[notebook:](Neural_Network_output_final.ipynb)
+[notebook: Neural_Network_output_final.ipynb](Neural_Network_output_final.ipynb)
 
-[html notebook:](Neural_Network_output_final.html)
+[html notebook: Neural_Network_output_final.html](Neural_Network_output_final.html)
 
 ## Write Predictions Back to Database
 
 All of the data was run through the final neural network model to calculate predicted values, and a new table called "predictions" was created containing the IMDB_id and the predicted class.
 
-[notebook: ](Machine_Learning_Model_Segment_4_Write_to_Database.ipynb)
+[notebook: Machine_Learning_Model_Segment_4_Write_to_Database.ipynb](Machine_Learning_Model_Segment_4_Write_to_Database.ipynb)
