@@ -55,15 +55,15 @@ IMDB data:
 * output file: imdb_main.csv
 
 TMDB data:
-* [notebook: TMDB_database_cleanup.ipynb](..//TMDB_database_cleanup.ipynb)
+* [notebook: the_movie_database_cleanup.ipynb](..//the_movie_database_cleanup.ipynb)
 * output file: tmdb_main.csv
 
 Awards data:
-* [notebook: Merging_IMDB_Awards](..//Merging_IMDB_Awards)
+* [notebook: Merging_IMDB_Awards](..//Merging_IMDB_Awards.ipynb)
 * file: N/A
 
 Merged IMDB and TMDB:
-* [notebook: Merging_IMDB_Awards](..//Merging_IMDB_Awards)
+* [notebook: Merging_IMDB_TMDB.ipynb](..//Merging_IMDB_TMDB.ipynb)
 * output file: merged_movies.csv
 
 In Segment 3, we explored using director information as a feature in the model. We identified two hypotheses:
@@ -79,7 +79,7 @@ Director names were provided in a string with up to two names. Each unique direc
 
 Models using these director features had accuracy rates around 90%, however we realized these features were calculated across the entire dataset rather than calculated per sample or calculated on a older dataset and used to predict on more recent movies releases. Small wonder the accuracy was so high. Trying to calculate these variables after selecting the samples became too difficult to accomplish in the available time, so director features were dropped from the model.
 
-[notebook: Exploratory_director_data.ipynb](Exploratory_director_data.ipynb)
+[notebook: Exploratory_Director_Data.ipynb](Exploratory_Director_Data.ipynb)
 
 ## How data was split for training and testing sets
 
@@ -183,4 +183,4 @@ Final Model:
 
 All of the data was run through the final neural network model to calculate predicted values, and a new table called "predictions" was created containing the IMDB_id and the predicted class.
 
-[notebook: Machine_Learning_Model_Segment_4_Write_to_Database.ipynb](..//Machine_Learning_Model_Segment_4_Write_to_Database.ipynb)
+[notebook: Machine_Learning_Model_Segment_4_Write_to_Database.ipynb](..//Machine_Learning/Machine_Learning_Model_Segment_4_Write_to_Database.ipynb)
