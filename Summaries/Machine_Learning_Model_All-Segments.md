@@ -161,9 +161,9 @@ Investigating this issue further showed that the validation sample is chosen by 
 
 Early Model:
 
-![deep learing model output](../Images/NN_output0.PNG)
+![deep learing model output](..//Images/NN_output0.PNG)
 
-![deep learing model output](../Images/NN_output02.PNG)
+![deep learing model output](..//Images/NN_output02.PNG)
 
 [notebook: Neural_Network_output_0.ipynb](Neural_Network_output_0.ipynb)
 
@@ -171,9 +171,9 @@ Early Model:
 
 Final Model:
 
-![deep learing model output](../Images/NN_output_final.PNG)
+![deep learing model output](..//Images/NN_output_final.PNG)
 
-![deep learing model output](../Images/NN_output_final_2.PNG)
+![deep learing model output](..//Images/NN_output_final_2.PNG)
 
 [notebook: Neural_Network_output_final.ipynb](Neural_Network_output_final.ipynb)
 
