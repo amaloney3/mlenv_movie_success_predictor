@@ -127,9 +127,9 @@ All of the model are poor at classifying successful movies. It is not surprising
 
 ![random forest output2](..//Images/RF_output_2.PNG)
 
-[notebook: Random_Forest_output_final.ipynb](Random_Forest_output_final.ipynb)
+[notebook: Random_Forest_output_final.ipynb](..//Random_Forest_output_final.ipynb)
 
-[hmtl notebook: Random_Forest_output_final.html](Random_Forest_output_final.html)
+[hmtl notebook: Random_Forest_output_final.html](..//Random_Forest_output_final.html)
 
 ### Logistic Regression
 
