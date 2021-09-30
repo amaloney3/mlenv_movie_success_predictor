@@ -119,13 +119,13 @@ The f1 score, is a summary measure of balance between precision and sensitivity.
 
 All of the model are poor at classifying successful movies. It is not surprising given the paucity of data to work with. The models need more relevant features in order to improve their classification power.
 
-![model comparison](Images/model_comparison.PNG)
+![model comparison](..//Images/model_comparison.PNG)
 
 ## Random Forest
 
-![random forest output](Images/RF_output.PNG)
+![random forest output](..//Images/RF_output.PNG)
 
-![random forest output2](Images/RF_output_2.PNG)
+![random forest output2](..//Images/RF_output_2.PNG)
 
 [notebook: Random_Forest_output_final.ipynb](Random_Forest_output_final.ipynb)
 
