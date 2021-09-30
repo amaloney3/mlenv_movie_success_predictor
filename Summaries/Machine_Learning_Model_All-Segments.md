@@ -127,9 +127,9 @@ All of the model are poor at classifying successful movies. It is not surprising
 
 ![random forest output2](..//Images/RF_output_2.PNG)
 
-[notebook: Random_Forest_output_final.ipynb](..//Random_Forest_output_final.ipynb)
+[notebook: Random_Forest_output_final.ipynb](..//Machine_Learning/Random_Forest_Model_output_final.html)
 
-[hmtl notebook: Random_Forest_output_final.html](..//Random_Forest_output_final.html)
+[hmtl notebook: Random_Forest_output_final.html](..//Machine_Learning/Random_Forest_output_final.html)
 
 ### Logistic Regression
 
@@ -137,9 +137,9 @@ All of the model are poor at classifying successful movies. It is not surprising
 
 ![logistic regression output2](..//Images/LR_output2.PNG)
 
-[notebook: Logistic_Regression_output_final.ipynb](Logistic_Regression_output_final.ipynb)
+[notebook: Logistic_Regression_output_final.ipynb](..//Machine_Learning/Logistic_Regression_output_final.ipynb)
 
-[html notebook: Logistic_Regression_output_final.html](Logistic_Regression_output_final.html)
+[html notebook: Logistic_Regression_output_final.html](..//Machine_Learning/Logistic_Regression_output_final.html)
 
 ### Support Vector Machine
 
@@ -147,9 +147,9 @@ All of the model are poor at classifying successful movies. It is not surprising
 
 ![Support Vector Machine output2](..//Images/SV_output2.PNG) 
 
-[notebook: Support_Vector_Machine_output_final.ipynb](Support_Vector_Machine_output_final.ipynb)
+[notebook: Support_Vector_Machine_output_final.ipynb](..//Machine_Learning/Support_Vector_Machine_output_final.ipynb)
 
-[html notebook: Support_Vector_Machine_output_final.html](Support_Vector_Machine_output_final.html)
+[html notebook: Support_Vector_Machine_output_final.html](..//Machine_Learning/Support_Vector_Machine_output_final.html)
 
 ### Deep Learning
 
@@ -165,9 +165,9 @@ Early Model:
 
 ![deep learing model output](..//Images/NN_output02.PNG)
 
-[notebook: Neural_Network_output_0.ipynb](Neural_Network_output_0.ipynb)
+[notebook: Neural_Network_output_0.ipynb](..//Machine_Learning/Neural_Network_output_0.ipynb)
 
-[html notebook: Neural_Network_output_0.html](Neural_Network_output_0.html)
+[html notebook: Neural_Network_output_0.html](..//Machine_Learning/Neural_Network_output_0.html)
 
 Final Model:
 
@@ -175,12 +175,12 @@ Final Model:
 
 ![deep learing model output](..//Images/NN_output_final_2.PNG)
 
-[notebook: Neural_Network_output_final.ipynb](Neural_Network_output_final.ipynb)
+[notebook: Neural_Network_output_final.ipynb](..//Machine_Learning/Neural_Network_output_final.ipynb)
 
-[html notebook: Neural_Network_output_final.html](Neural_Network_output_final.html)
+[html notebook: Neural_Network_output_final.html](..//Machine_Learning/Neural_Network_output_final.html)
 
 ## Write Predictions Back to Database
 
 All of the data was run through the final neural network model to calculate predicted values, and a new table called "predictions" was created containing the IMDB_id and the predicted class.
 
-[notebook: Machine_Learning_Model_Segment_4_Write_to_Database.ipynb](Machine_Learning_Model_Segment_4_Write_to_Database.ipynb)
+[notebook: Machine_Learning_Model_Segment_4_Write_to_Database.ipynb](..//Machine_Learning_Model_Segment_4_Write_to_Database.ipynb)
