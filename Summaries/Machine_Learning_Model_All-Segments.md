@@ -79,7 +79,7 @@ Director names were provided in a string with up to two names. Each unique direc
 
 Models using these director features had accuracy rates around 90%, however we realized these features were calculated across the entire dataset rather than calculated per sample or calculated on a older dataset and used to predict on more recent movies releases. Small wonder the accuracy was so high. Trying to calculate these variables after selecting the samples became too difficult to accomplish in the available time, so director features were dropped from the model.
 
-[notebook: Exploratory_Director_Data.ipynb](Exploratory_Director_Data.ipynb)
+[notebook: Exploratory_Director_Data.ipynb](..//Exploratory_Director_Data.ipynb)
 
 ## How data was split for training and testing sets
 
