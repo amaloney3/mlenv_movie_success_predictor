@@ -51,19 +51,19 @@ The awards dataset contained over 2 million records covering more than 16,000 di
 Source code for cleaning datasets:
 
 IMDB data:
-* [notebook: IMDB_database_cleanup.ipynb](IMDB_database_cleanup.ipynb)
+* [notebook: IMDB_database_cleanup.ipynb](..//IMDB_database_cleanup.ipynb)
 * output file: imdb_main.csv
 
 TMDB data:
-* [notebook: TMDB_database_cleanup.ipynb](TMDB_database_cleanup.ipynb)
+* [notebook: TMDB_database_cleanup.ipynb](..//TMDB_database_cleanup.ipynb)
 * output file: tmdb_main.csv
 
 Awards data:
-* [notebook: Merging_IMDB_Awards](Merging_IMDB_Awards)
+* [notebook: Merging_IMDB_Awards](..//Merging_IMDB_Awards)
 * file: N/A
 
 Merged IMDB and TMDB:
-* [notebook: Merging_IMDB_Awards](Merging_IMDB_Awards)
+* [notebook: Merging_IMDB_Awards](..//Merging_IMDB_Awards)
 * output file: merged_movies.csv
 
 In Segment 3, we explored using director information as a feature in the model. We identified two hypotheses:
@@ -127,9 +127,9 @@ All of the model are poor at classifying successful movies. It is not surprising
 
 ![random forest output2](..//Images/RF_output_2.PNG)
 
-[notebook: Random_Forest_output_final.ipynb](..//Machine_Learning/Random_Forest_Model_output_final.html)
+[notebook: Random_Forest_output_final.ipynb](..//Machine_Learning/Random_Forest_Model_output_final.ipynb)
 
-[hmtl notebook: Random_Forest_output_final.html](..//Machine_Learning/Random_Forest_output_final.html)
+[hmtl notebook: Random_Forest_output_final.html](..//Machine_Learning/Random_Forest_Model_output_final.html)
 
 ### Logistic Regression
 
@@ -165,9 +165,9 @@ Early Model:
 
 ![deep learing model output](..//Images/NN_output02.PNG)
 
-[notebook: Neural_Network_output_0.ipynb](..//Machine_Learning/Neural_Network_output_0.ipynb)
+[notebook: Neural_Network_output_0.ipynb](..//Machine_Learning/Neural_Network_Model_output_0.ipynb)
 
-[html notebook: Neural_Network_output_0.html](..//Machine_Learning/Neural_Network_output_0.html)
+[html notebook: Neural_Network_output_0.html](..//Machine_Learning/Neural_Network_Model_output_0.html)
 
 Final Model:
 
@@ -175,9 +175,9 @@ Final Model:
 
 ![deep learing model output](..//Images/NN_output_final_2.PNG)
 
-[notebook: Neural_Network_output_final.ipynb](..//Machine_Learning/Neural_Network_output_final.ipynb)
+[notebook: Neural_Network_output_final.ipynb](..//Machine_Learning/Neural_Network_Model_output_final.ipynb)
 
-[html notebook: Neural_Network_output_final.html](..//Machine_Learning/Neural_Network_output_final.html)
+[html notebook: Neural_Network_output_final.html](..//Machine_Learning/Neural_Network_Model_output_final.html)
 
 ## Write Predictions Back to Database
 
