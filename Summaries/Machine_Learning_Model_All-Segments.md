@@ -133,9 +133,9 @@ All of the model are poor at classifying successful movies. It is not surprising
 
 ### Logistic Regression
 
-![logistic regression output](Images/LR_output.PNG)
+![logistic regression output](..//Images/LR_output.PNG)
 
-![logistic regression output2](Images/LR_output2.PNG)
+![logistic regression output2](..//Images/LR_output2.PNG)
 
 [notebook: Logistic_Regression_output_final.ipynb](Logistic_Regression_output_final.ipynb)
 
@@ -143,9 +143,9 @@ All of the model are poor at classifying successful movies. It is not surprising
 
 ### Support Vector Machine
 
-![Support Vector Machine output](Images/SV_output.PNG) 
+![Support Vector Machine output](..//Images/SV_output.PNG) 
 
-![Support Vector Machine output2](Images/SV_output2.PNG) 
+![Support Vector Machine output2](..//Images/SV_output2.PNG) 
 
 [notebook: Support_Vector_Machine_output_final.ipynb](Support_Vector_Machine_output_final.ipynb)
 
