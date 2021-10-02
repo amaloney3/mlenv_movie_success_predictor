@@ -38,7 +38,7 @@ IMDB data cleaning, evaluation, selection:
 
 TMDB data cleaning, evaluation, selection:
 
-[notebook: the_movies_database_cleanup.ipynb](the_movies_database_cleanup.ipynb)
+[notebook: the_movie_database_cleanup.ipynb](the_movie_database_cleanup.ipynb)
 
 [notebook with exploratory graphics: Exploratory/The_Movies_database_cleanup_with_exploratory_analysis.ipynb](Exploratory/The_Movies_database_cleanup_with_exploratory_analysis.ipynb)
 
@@ -62,19 +62,19 @@ We pivoted from using colab as our data was not 'big data' to using jupyter note
 
 Four types of models were evaluated: Random Forest, Logistic Regression, Support Vector Machine, and Deep Learning. 
 
-[notebook: Random_Forest_output_final.ipynb](..//Machine_Learning/Random_Forest_Model_output_final.ipynb)
+[notebook: Random_Forest_output_final.ipynb](Machine_Learning/Random_Forest_Model_output_final.ipynb)
 
-[notebook: Logistic_Regression_output_final.ipynb](..//Machine_Learning/Logistic_Regression_output_final.ipynb)
+[notebook: Logistic_Regression_output_final.ipynb](Machine_Learning/Logistic_Regression_output_final.ipynb)
 
-[notebook: Support_Vector_Machine_output_final.ipynb](..//Machine_Learning/Support_Vector_Machine_output_final.ipynb)
+[notebook: Support_Vector_Machine_output_final.ipynb](Machine_Learning/Support_Vector_Machine_output_final.ipynb)
 
-[notebook: Neural_Network_output_final.ipynb](..//Machine_Learning/Neural_Network_Model_output_final.ipynb)
+[notebook: Neural_Network_output_final.ipynb](Machine_Learning/Neural_Network_Model_output_final.ipynb)
 
 ## Results
 
 All of the models are poor at classifying successful movies. It is not surprising given the paucity of data to work with. The models need more relevant features in order to improve their classification power.
 
-![model comparison](..//Images/model_comparison.PNG)
+![model comparison](Images/model_comparison.PNG)
 
 > Having a ton of data doesn’t necessarily mean it is useful.
 
